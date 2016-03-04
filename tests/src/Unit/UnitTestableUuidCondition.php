@@ -8,7 +8,13 @@
 namespace Drupal\Tests\uuid_condition\Unit;
 
 use Drupal\uuid_condition\Plugin\Condition\UuidCondition;
+use Drupal\node\Entity\Node;
 
+/**
+ * Class UnitTestableUuidCondition.
+ *
+ * @package Drupal\Tests\uuid_condition\Unit
+ */
 class UnitTestableUuidCondition extends UuidCondition
 {
 
@@ -27,18 +33,23 @@ class UnitTestableUuidCondition extends UuidCondition
   }
 
   /**
-   * Setter for $mockNode
+   * Setter for $mockNode.
    *
-   * @param \Drupal\node\Entity\Node $mockNode
+   * @param \Drupal\node\Entity\Node $mock_node
+   *   The mock node.
    */
-  public function setMockContextNode($mockNode) {
-    $this->mockNode = $mockNode;
+  public function setMockContextNode(Node $mock_node) {
+    $this->mockNode = $mock_node;
   }
 
   /**
    * Overrides ContextAware getContextValue() to return various mocked contexts.
    *
-   * @return anything
+   * @param string $context
+   *   The context to get.
+   *
+   * @return NULL|\Drupal\node\Entity\Node
+   *   The node if it exists, else NULL.
    */
   public function getContextValue($context) {
     switch ($context) {
@@ -46,9 +57,9 @@ class UnitTestableUuidCondition extends UuidCondition
         if ($this->mockNode) {
           return $this->mockNode;
         }
-      default:
-        return NULL;
+        break;
     }
+    return NULL;
   }
 
 }
