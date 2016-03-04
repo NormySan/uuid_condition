@@ -1,6 +1,6 @@
 {
   "name": "drupal/uuid_condition",
-  "description": "A simply Drupal condition plugin which works at the Drupal block system.",
+  "description": "A simple Drupal condition plugin which works at the Drupal block system.",
   "type": "drupal-module",
   "license": "GPL-2.0+",
   "authors": [
