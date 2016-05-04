@@ -72,16 +72,12 @@ class UuidConditionTest extends UnitTestCase {
    * @test
    */
   public function evaluateAlwaysTrueWithNoContext() {
+    // Set some config to ensure the context is checked.
     $mock_config = $this->getConfigTemplateStub();
-    $this->plugin->setConfiguration($mock_config);
-
-    // Test without a context: first with no uuid config.
-    $this->assertEquals(TRUE, $this->plugin->evaluate(), 'Plugin evaluated with no context should always evaluate to TRUE');
-
-    // Test again, but with valid configuration this time.
     $mock_config['uuid'] = self::MOCK_UUID;
+
     $this->plugin->setConfiguration($mock_config);
-    $this->assertEquals(TRUE, $this->plugin->evaluate(), 'Plugin evaluated with no context should always evaluate to TRUE');
+    $this->assertEquals(FALSE, $this->plugin->evaluate(), 'Plugin evaluated with no context should always evaluate to FALSE');
   }
 
   /**

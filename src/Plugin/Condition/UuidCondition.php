@@ -20,9 +20,10 @@ use Drupal\Core\Form\FormStateInterface;
  *   id = "uuid",
  *   label = @Translation("Content has UUID"),
  *   context = {
- *     "node" = @ContextDefinition("entity:node", label = @Translation("Node"))
+ *     "node" = @ContextDefinition("entity:node", required = FALSE, label = @Translation("Node"))
  *   },
  * )
+ *
  */
 class UuidCondition extends ConditionPluginBase {
 
@@ -71,20 +72,21 @@ class UuidCondition extends ConditionPluginBase {
     }
 
     // @todo load any type of entity, not just a node.
-    $entity = $this->getContextValue('node');
-    if ($entity && $uuid = $entity->uuid()) {
-      // Return TRUE if the entity uuid matches any uuid in the block configuration.
-      if ($uuid_config = $this->configuration['uuid']) {
-        if (strpos($uuid_config, $uuid) !== FALSE) {
-          return TRUE;
-        }
-      }
 
-      // Context UUID doesn't match configuration.
+    $entity = $this->getContextValue('node');
+    if (!$entity) {
+      // No entity was returned from the context.
       return FALSE;
     }
-    else {
-      // Context doesn't appear to have a uuid, so let it pass through.
+
+    $uuid = $entity->uuid();
+    if (!$uuid) {
+      // Entity has no UUID.
+      return FALSE;
+    }
+
+    // Return TRUE if the uuid matches any uuid in the block configuration.
+    if (strpos($this->configuration['uuid'], $uuid) !== FALSE) {
       return TRUE;
     }
   }
