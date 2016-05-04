@@ -21,21 +21,26 @@ use Drupal\Core\Form\FormStateInterface;
  *   label = @Translation("Content has UUID"),
  *   context = {
  *     "node" = @ContextDefinition("entity:node", label = @Translation("Node"))
- *   }
+ *   },
  * )
- *
  */
 class UuidCondition extends ConditionPluginBase {
 
   /**
    * {@inheritdoc}
    */
+  public function defaultConfiguration() {
+    return array('uuid' => '') + parent::defaultConfiguration();
+  }
+
+  /**
+   * {@inheritdoc}
+   */
   public function buildConfigurationForm(array $form, FormStateInterface $form_state) {
-    $uuid = isset($this->configuration['uuid']) ? $this->configuration['uuid'] : '';
     $form['uuid'] = array(
       '#title' => $this->t('Entity UUIDs, one per line'),
       '#type' => 'textarea',
-      '#default_value' => $uuid,
+      '#default_value' => $this->configuration['uuid'],
     );
     return parent::buildConfigurationForm($form, $form_state);
   }

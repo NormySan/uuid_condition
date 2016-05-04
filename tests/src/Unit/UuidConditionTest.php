@@ -108,10 +108,10 @@ class UuidConditionTest extends UnitTestCase {
 
     // We test multiple configuration values.
     $mock_uuid_configs = array(
-        'the only config' => $mock_uuid,
-        'at the start' => "19dd9013-7a61-46b4-bd96-56506127b85d\n$mock_uuid",
-        'at the end' => "$mock_uuid \n 19dd9013-7a61-46b4-bd96-56506127b85d",
-        'in the middle' => "19dd9013-7a61-46b4-bd96-56506127b85d  $mock_uuid \r\n 19dd9013-7a61-46b4-bd96-56506127b85d\n",
+      'the only config' => $mock_uuid,
+      'at the start' => "19dd9013-7a61-46b4-bd96-56506127b85d\n$mock_uuid",
+      'at the end' => "$mock_uuid \n 19dd9013-7a61-46b4-bd96-56506127b85d",
+      'in the middle' => "19dd9013-7a61-46b4-bd96-56506127b85d  $mock_uuid \r\n 19dd9013-7a61-46b4-bd96-56506127b85d\n",
     );
 
     $mock_config = $this->getConfigTemplateStub();
@@ -160,12 +160,12 @@ class UuidConditionTest extends UnitTestCase {
    */
   private function getConfigTemplateStub() {
     return array(
-        'id' => 'uuid',
-        'negate' => FALSE,
-        'uuid' => '',
-        'context_mapping' => array(
-            'node' => '@node.node_route_context:node',
-        ),
+      'id' => 'uuid',
+      'negate' => FALSE,
+      'uuid' => '',
+      'context_mapping' => array(
+        'node' => '@node.node_route_context:node',
+      ),
     );
   }
 
